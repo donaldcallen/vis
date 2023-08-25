@@ -500,8 +500,9 @@ static size_t getpos(lua_State *L, int narg) {
 }
 
 static size_t checkpos(lua_State *L, int narg) {
+	#define DOUBLE_SIGNIFICAND_PRECISION 9007199254740991
 	lua_Number n = luaL_checknumber(L, narg);
-	if (n >= 0 && n <= SIZE_MAX && n == (size_t)n)
+	if (n >= 0 && n <= DOUBLE_SIGNIFICAND_PRECISION && n == (size_t)n)
 		return n;
 	return luaL_argerror(L, narg, "expected position, got number");
 }
